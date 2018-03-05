@@ -1,9 +1,22 @@
 cmake_minimum_required(VERSION 3.9)
 project(hello)
 
-set(EOSIO_INSTALL_DIR $ENV{HOME}/eos/build/install)
+set(EOSIO_DAWN 2)
+
+set(EOSIO_INSTALL_DIR $ENV{HOME}/eos-dawn-2.x/build/install)
 set(BOOST_INSTALL_DIR $ENV{HOME}/opt/boost_1_66_0)
 set(WASM_INSTALL_DIR $ENV{HOME}/opt/wasm)
+
+
+if(${EOSIO_DAWN} EQUAL 2)
+    set(S2WASM_PATH $ENV{HOME}/opt/binaryen/s2wasm)
+    set(ABIGEN_PATH ${EOSIO_INSTALL_DIR}/bin/abi_gen)
+elseif(${EOSIO_DAWN} EQUAL 3)
+    set(S2WASM_PATH ${EOSIO_INSTALL_DIR}/bin/eosio-s2wasm)
+    set(ABIGEN_PATH ${EOSIO_INSTALL_DIR}/bin/eosio-abigen)
+else()
+    error("EOSIO DAWN ${EOSIO_DAWN} is not supported.")
+endif()
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_C_COMPILER ${WASM_INSTALL_DIR}/bin/clang)
@@ -59,7 +72,7 @@ add_custom_command(OUTPUT ${CONTRACT_ASSEMBLY_FILE}
 add_custom_target(wast ALL
         DEPENDS ${CONTRACT_WAST_FILE})
 add_custom_command(OUTPUT ${CONTRACT_WAST_FILE}
-        COMMAND ${EOSIO_INSTALL_DIR}/bin/eosio-s2wasm
+        COMMAND ${S2WASM_PATH}
         -o ${CONTRACT_WAST_FILE}
         -s 16384
         ${CONTRACT_ASSEMBLY_FILE}
@@ -73,7 +86,7 @@ endforeach()
 add_custom_target(abi ALL
         DEPENDS ${CONTRACT_ABI_FILE})
 add_custom_command(OUTPUT ${CONTRACT_ABI_FILE}
-        COMMAND ${EOSIO_INSTALL_DIR}/bin/eosio-abigen
+        COMMAND ${ABIGEN_PATH}
         -extra-arg=-c
         -extra-arg=--std=c++14
         -extra-arg=--target=wasm32

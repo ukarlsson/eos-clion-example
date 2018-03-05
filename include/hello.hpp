@@ -2,7 +2,7 @@
  *  @file
  *  @copyright defined in eos/LICENSE.txt
  */
-#include <eosiolib/eosio.hpp>
-#include <eosiolib/db.hpp>
+#include <eoslib/eos.hpp>
+#include <eoslib/db.hpp>
 
 
