@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.9)
-project(currency)
+project(hello)
 
 set(EOSIO_INSTALL_DIR $ENV{HOME}/eos/build/install)
 set(BOOST_INSTALL_DIR $ENV{HOME}/opt/boost_1_66_0)
