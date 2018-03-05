@@ -41,22 +41,22 @@ set(CONTRACT_ASSEMBLY_FILE ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.s)
 set(CONTRACT_WAST_FILE ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.wast)
 set(CONTRACT_ABI_FILE ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.abi)
 
-add_custom_target(llvm-link
+add_custom_target(link
         DEPENDS ${CONTRACT_BYTECODE_FILE})
 add_custom_command(OUTPUT ${CONTRACT_BYTECODE_FILE}
         COMMAND ${WASM_INSTALL_DIR}/bin/llvm-link
         -o ${CONTRACT_BYTECODE_FILE} $<TARGET_OBJECTS:objects>
         DEPENDS $<TARGET_OBJECTS:objects>)
 
-add_custom_target(lcc
-        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.s)
+add_custom_target(assembly
+        DEPENDS ${CONTRACT_ASSEMBLY_FILE})
 add_custom_command(OUTPUT ${CONTRACT_ASSEMBLY_FILE}
         COMMAND ${WASM_INSTALL_DIR}/bin/llc
         --asm-verbose=false
         -o ${CONTRACT_ASSEMBLY_FILE} ${CONTRACT_BYTECODE_FILE}
         DEPENDS ${CONTRACT_BYTECODE_FILE})
 
-add_custom_target(s2wasm ALL
+add_custom_target(wast ALL
         DEPENDS ${CONTRACT_WAST_FILE})
 add_custom_command(OUTPUT ${CONTRACT_WAST_FILE}
         COMMAND ${EOSIO_INSTALL_DIR}/bin/eosio-s2wasm
