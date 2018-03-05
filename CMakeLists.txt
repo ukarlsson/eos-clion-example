@@ -3,7 +3,7 @@ project(hello)
 
 set(EOSIO_DAWN 2)
 
-set(EOSIO_INSTALL_DIR $ENV{HOME}/eos-dawn-2.x/build/install)
+set(EOSIO_INSTALL_DIR $ENV{HOME}/eos/build/install)
 set(BOOST_INSTALL_DIR $ENV{HOME}/opt/boost_1_66_0)
 set(WASM_INSTALL_DIR $ENV{HOME}/opt/wasm)
 
