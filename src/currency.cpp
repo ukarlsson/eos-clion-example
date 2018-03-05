@@ -3,7 +3,7 @@
  *  @copyright defined in eos/LICENSE.txt
  */
 
-#include <currency.hpp> /// defines transfer struct (abi)
+#include <include/currency.hpp> /// defines transfer struct (abi)
 
 extern "C" {
 /// The apply method implements the dispatch of events to this contract
