@@ -20,7 +20,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-threadsafe-statics")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions")
 
-include_directories(.)
+include_directories(include)
 include_directories(${EOSIO_INSTALL_DIR}/include)
 include_directories(${EOSIO_INSTALL_DIR}/include/libc++/upstream/include)
 include_directories(${EOSIO_INSTALL_DIR}/include/musl/upstream/include)

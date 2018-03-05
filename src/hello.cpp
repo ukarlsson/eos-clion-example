@@ -2,7 +2,7 @@
  *  @file
  *  @copyright defined in eos/LICENSE.txt
  */
-#include <include/hello.hpp>
+#include <hello.hpp>
 
 /**
  *  The init() and apply() methods must have C calling convention so that the blockchain can lookup and
